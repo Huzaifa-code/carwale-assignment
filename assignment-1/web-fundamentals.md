@@ -70,6 +70,73 @@ Simple Object Access Protocol - is more secured
 
 Communincation is done in XML format.
 
+Frotend API Code :
+
+```js
+const axios = require('axios');
+
+const makeSoapCall = async () => {
+  const url = 'http://localhost:3000/calculator';
+  const xml = `
+    <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cal="http://example.com/CalculatorService/">
+       <soapenv:Header/>
+       <soapenv:Body>
+          <cal:Add>
+             <a>5</a>
+             <b>3</b>
+          </cal:Add>
+       </soapenv:Body>
+    </soapenv:Envelope>
+  `;
+
+  try {
+    const response = await axios.post(url, xml, {
+      headers: {
+        'Content-Type': 'text/xml',
+      },
+    });
+    console.log(response.data);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+makeSoapCall();
+```
+
 ### GraphQL APIs -
 
 GraphQL is query language
+
+For GraphQL we need Apollo Client 
+
+
+Frontend React code :
+
+```js
+import React from 'react';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  useQuery,
+  gql,
+} from '@apollo/client';
+
+const client = new ApolloClient({
+  uri: 'http://localhost:4000/graphql', // Replace with your GraphQL server URL
+  cache: new InMemoryCache(),
+});
+
+const GET_USERS = gql`
+  query GetUsers {
+    users {
+      id
+      name
+      email
+    }
+  }
+`;
+
+```
+
