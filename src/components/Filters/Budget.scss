@@ -1,0 +1,42 @@
+
+.wrapper-budget{
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+
+
+    .budget-buttons{
+        border: 1px solid #c1c1c1;
+        border-radius: 2rem;
+        padding: 5px 15px;
+        cursor: pointer;
+        font-size: 0.8rem;
+
+        &:hover{
+            border: 1px solid #359dff;
+            color: #359dff;
+        }
+    }
+
+    .budget-buttons.active {
+        border-color: #359dff;
+        color: #359dff;
+        background-color: #f0f8ff; 
+    }
+
+}
+
+.wrapper-budget-input{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 10px;
+
+    .bgt-ip {
+        width: 100px;
+        padding: 10px 3px;
+    }
+}
