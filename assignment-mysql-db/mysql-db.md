@@ -7,7 +7,6 @@ Relational Database design for E-commerce Platform
 2. products
 3. orders
 4. category
-5. 
 
 ### 1. customers :
 
@@ -118,6 +117,7 @@ customer table :
 
 ```sql
 INSERT INTO customers (email, name, phone_no, address) VALUES
+    ('huzaifa@gmail.com','huzaifa', '+911148174','Indore')
     ( 'anish@gmail.com', 'anish', '+91123384347','vashi navi mumabi vishwaroop IT PARK' ),
     ('john@gmail.com','john','+918734242847','Bhopal MP'  );
 ```
