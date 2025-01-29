@@ -8,10 +8,19 @@ dotnet new webapi -o api
 cd ./api
 ```
 
-
+### Start the server : 
 ```bash
 dotnet watch run
 ```
+
+or 
+```
+dotnet run
+```
+
+### Open swagger docs at :
+
+[localhost:5204/swagger](localhost:5204/swagger)
 
 
 ## Swagger DOCS :

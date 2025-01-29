@@ -26,6 +26,18 @@ builder.Services.AddScoped<IStocksServices, StocksServices>();
 builder.Services.AddAutoMapper(typeof(FiltersMappingProfile));
 builder.Services.AddAutoMapper(typeof(StocksMappingProfile));
 
+// CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder =>
+        {
+            builder.WithOrigins("https://carwale.com") 
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+        });
+});
+
 
 builder.Services.AddControllers();
 
@@ -40,6 +52,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("AllowSpecificOrigin");
 
 app.UseRouting();
 app.MapControllers(); 
