@@ -4,7 +4,7 @@
 // Lpg = 4,
 // Electric = 5,
 // Hybrid = 6
-// Fuel.jsx
+
 
 import React from 'react';
 import './Fuel.scss';

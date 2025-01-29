@@ -118,7 +118,7 @@ customer table :
 ```sql
 INSERT INTO customers (email, name, phone_no, address) VALUES
     ('huzaifa@gmail.com','huzaifa', '+911148174','Indore')
-    ( 'anish@gmail.com', 'anish', '+91123384347','vashi navi mumabi vishwaroop IT PARK' ),
+    ('anish@gmail.com', 'anish', '+91123384347','vashi navi mumabi vishwaroop IT PARK' ),
     ('john@gmail.com','john','+918734242847','Bhopal MP'  );
 ```
 
