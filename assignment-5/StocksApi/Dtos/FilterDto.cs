@@ -5,11 +5,44 @@ namespace StocksApi.Dtos
 {
     public class FilterDto
     {           
-        // TODO : update this validation to allow decimals like 1.5, 7.5-11.5
-        [RegularExpression(@"^\d+(-\d+)?$", ErrorMessage = "Budget must be in the format 'min-max' or a single number.")]
+        [RegularExpression(@"^\d+(\.\d+)?(-\d+(\.\d+)?)?$", ErrorMessage = "Budget must be in the format 'min-max' or a single number.")]
         public string? Budget { get; set; }
 
-        // TODO : Add validation to check  FuelType int is between 1 and 6
+        [FuelTypesValidation(ErrorMessage = "FuelTypes must be in the format '1', '1+2', '2+3+4', etc., and each value must be between 1 and 6.")]
         public string? FuelTypes { get; set; }
+    }
+
+
+    public class FuelTypesValidationAttribute : ValidationAttribute
+    {
+        protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
+        {
+            if (value == null || string.IsNullOrWhiteSpace(value.ToString()))
+            {
+                return ValidationResult.Success;
+            }
+
+            string fuelTypes = value.ToString()!;
+
+            var fuelTypeValues = fuelTypes.Split('+');
+
+            foreach (var fuelTypeValue in fuelTypeValues)
+            {
+                
+                if (!int.TryParse(fuelTypeValue, out int fuelType))
+                {
+                    return new ValidationResult($"Invalid fuel type value: '{fuelTypeValue}'. Fuel types must be integers.");
+                }
+
+                
+                if (fuelType < 1 || fuelType > 6)
+                {
+                    return new ValidationResult($"Fuel type '{fuelType}' must be between 1 and 6.");
+                }
+            }
+
+           
+            return ValidationResult.Success;
+        }
     }
 }

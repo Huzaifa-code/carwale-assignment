@@ -17,6 +17,12 @@ builder.Services.AddSingleton<DatabaseContext>(sp =>
 {
     var configuration = sp.GetRequiredService<IConfiguration>();
     var connectionString = configuration.GetConnectionString("DefaultConnection");
+
+    if (string.IsNullOrEmpty(connectionString))
+    {
+        throw new InvalidOperationException("The 'DefaultConnection' connection string is missing or empty in the configuration.");
+    }
+
     return new DatabaseContext(connectionString);
 });
 

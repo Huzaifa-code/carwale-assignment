@@ -59,3 +59,10 @@ if (app.Environment.IsDevelopment())
 ```
  dotnet add package Dapper
 ```
+
+
+Swagger : 
+
+![](https://i.imgur.com/fQCdGpP.png)
+
+![](https://i.imgur.com/TDQyjKj.png)
