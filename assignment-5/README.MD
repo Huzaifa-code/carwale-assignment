@@ -48,3 +48,10 @@ Manages database interactions and entity definitions. This includes:
         - FuelType.cs
     - Data
         - DatabaseContext.cs
+
+
+# Swagger : 
+
+![](https://i.imgur.com/fQCdGpP.png)
+
+![](https://i.imgur.com/TDQyjKj.png)
