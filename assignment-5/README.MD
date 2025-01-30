@@ -1,28 +1,50 @@
+# **Stocks API - With Layered Architecture**  
+
+This project follows a **three-layered architecture** for better code organization and maintainability.  
+
+## **Architecture Overview**  
+
+### **1. Presentation Layer** (`StocksApi`)  
+Handles HTTP requests and responses. This layer consists of:  
+- `Controllers` – Manages API endpoints.  
+- `DTOs` – Defines data transfer objects for structured API responses.  
+- `Mappers` – Converts between DTOs and domain models.  
+
+### **2. Business Layer** (`StocksApi.BAL`)  
+Contains the business logic and service layer. This includes:  
+- `Interfaces` – Defines contracts for services.  
+- `Services` – Implements business logic.  
+
+### **3. Data Access Layer** (`StocksApi.DAL`)  
+Manages database interactions and entity definitions. This includes:  
+- `Entities` – Defines database models.  
+- `Interfaces` – Declares repository contracts.  
+- `Repositories` – Implements data access logic.  
+- `Enums` – Contains enumerations for domain-specific values.  
+- `Data` – Defines database context for Entity Framework.  
 
 
 
-### Command to add reference :  
+# Folder Structure :
 
-example to connect DAL with StocksApi (Presentation Layer)
-```
-dotnet add .\StocksApi.DAL\ reference .\StocksApi\ 
-```
-
-
-My Folder Structure :
-
-- StocksApi (Presentation Layer)
+- **StocksApi** (Presentation Layer)
     - controller
     - Dtos
     - Mappers
-- StocksApi.BAL - Business Access Layer
+- **StocksApi.BAL** - Business Access Layer
     - Interfaces
         - IStocksServices.cs
     - Services
         - StocksServices.cs
-- StocksApi.DAL - Data Access Layer
+- **StocksApi.DAL** - Data Access Layer
     - Entities
+        - Filter.cs
+        - StocksCars.cs
     - Interfaces
-        - IStockRepo.cs
+        - IStocksRepo.cs
     - Repositories
         - StocksRepo.cs
+    - Enums
+        - FuelType.cs
+    - Data
+        - DatabaseContext.cs

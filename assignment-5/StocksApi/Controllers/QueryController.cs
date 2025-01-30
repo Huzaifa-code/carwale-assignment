@@ -11,11 +11,10 @@ namespace StocksApi.Controllers
     [Route("/api/stocks")]
     public class QueryController : ControllerBase
     {   
-        // here access "services" from BAL through dependency injection
+        
         private readonly IStocksServices _stocksService;
         private readonly IMapper _mapper;
 
-        // Constructor 
         public QueryController(IStocksServices stockService, IMapper mapper){
             _stocksService = stockService;
             _mapper = mapper;
@@ -35,7 +34,7 @@ namespace StocksApi.Controllers
             return Ok(StocksDto);
         }
 
-        // Filters Get By FuelType, Budget 
+        // Filters Get By Filter - FuelType, Budget 
         [HttpGet("filter")]
         public async Task<IActionResult> GetByFilter([FromQuery] FilterDto filter){
             if(!ModelState.IsValid)
