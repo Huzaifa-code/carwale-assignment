@@ -25,6 +25,11 @@ namespace StocksApi.Controllers
         public async Task<IActionResult> GetAll(){
             var stocks = await _stocksService.GetAllStocksAsync();
 
+            if (stocks == null || !stocks.Any())
+            {
+                return NotFound("No stocks found.");
+            }
+
             var StocksDto = _mapper.Map<IEnumerable<StocksDto>>(stocks); // Mapping from stocks Entity to StocksDto
 
             foreach(var stock in StocksDto){
@@ -42,11 +47,15 @@ namespace StocksApi.Controllers
 
             var filters = _mapper.Map<FilterDto,Filters>(filter); // Mapping from FilterDto to Filters
 
-            Console.WriteLine("Filters : ");    
-            Console.WriteLine(filters.FuelTypes);
-
             var stocks = await _stocksService.GetStocksByFilterAsync(filters);
+
+            if (stocks == null || !stocks.Any())
+            {
+                return NotFound("No stocks found matching the specified criteria.");
+            }
+
             var StocksDto = _mapper.Map<IEnumerable<StocksDto>>(stocks); // Mapping from stocks Entity to StocksDto
+
 
             foreach(var stock in StocksDto){
                 stock.IsValueForMoney = _stocksService.IsValueForMoney(stock.Price, stock.Kms);
@@ -61,11 +70,24 @@ namespace StocksApi.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var stock = _mapper.Map<StocksCars>(createStocksDto); // Map DTO to entity
-            var createdStock = await _stocksService.CreateStockAsync(stock);
+            try
+            {
 
-            var stockDto = _mapper.Map<StocksDto>(createdStock); // Map entity back to DTO
-            return Ok(stockDto);
+                var stock = _mapper.Map<StocksCars>(createStocksDto); // Map DTO to entity
+                var createdStock = await _stocksService.CreateStockAsync(stock);
+
+                if (createdStock == null)
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while creating the stock.");
+                }
+                var stockDto = _mapper.Map<StocksDto>(createdStock); // Map entity back to DTO
+                return Ok(stockDto);
+            }
+            catch (Exception ex)
+            {   
+                Console.WriteLine(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, "An unexpected error occurred while processing your request.");
+            }
         }
 
         [HttpPut("update")]
@@ -80,7 +102,7 @@ namespace StocksApi.Controllers
             if (!isUpdated)
                 return NotFound("Stock not found or could not be updated.");
 
-            return Ok("Stock updated successfully.");
+            return Ok("Stock updated successfully.");            
         }
         
 
