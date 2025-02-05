@@ -1,0 +1,6 @@
+@Carwale_HostAddress = http://localhost:5204
+
+GET {{Carwale_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

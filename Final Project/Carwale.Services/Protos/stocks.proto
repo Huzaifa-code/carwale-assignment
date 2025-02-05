@@ -1,0 +1,102 @@
+syntax = "proto3";
+
+option csharp_namespace = "Carwale.GrpcServices";
+
+package stocks;
+
+import "google/protobuf/empty.proto";   // Fix for "google.protobuf.Empty" error
+
+message PaginationRequest {
+  int32 page_no = 1;  
+  int32 page_size = 2; 
+}
+
+message Filter {
+  string budget = 1;
+  string fuel_types = 2;
+  int32 city_id = 3;
+}
+
+message StocksRequest {
+  Filter filter = 1;
+  PaginationRequest pagination = 2;
+}
+
+message MakeRequest {
+  int32 make_id = 1;
+}
+
+message Stock {
+  int32 id = 1;
+  int32 make_id = 2;
+  int32 fuel_id = 3;
+  int32 model_id = 4;
+  double price = 5;
+  int32 city_id = 7;
+  string registration_no = 8;
+  string image = 9;
+  string make_name = 10;
+  string model_name = 11;
+  string fuel_name = 12;
+  string city_name = 13;
+}
+
+message City {
+  int32 id = 1;
+  string city_name = 2;
+}
+
+message Make {
+  int32 id = 1;
+  string make_name = 2;
+}
+
+message Model {
+  int32 id = 1;
+  string model_name = 2;
+  int32 make_id = 3;
+  double max_allowed_price = 4;
+  double min_allowed_price = 5;
+}
+
+message StocksResponse {
+  repeated Stock stocks = 1;
+}
+
+message CitiesResponse {
+  repeated City cities = 1;
+}
+
+message MakeNamesResponse {
+  repeated Make makes = 1;
+}
+
+message ModelsResponse {
+  repeated Model models = 1;
+}
+
+
+message StockCreationRequest {
+  int32 make_id = 1;
+  int32 fuel_id = 2;
+  double price = 3;
+  int32 city_id = 5;
+  int32 model_id = 7;
+  string registration_no = 8;
+  string image = 9;
+}
+
+message StockDeleteRequest {
+  int32 id = 1;
+}
+
+// Service definition
+service StocksServ {
+  rpc GetAllStocks ( StocksRequest ) returns (StocksResponse);
+  rpc GetAllCities (google.protobuf.Empty) returns (CitiesResponse);
+  rpc GetAllMakeNames (google.protobuf.Empty) returns (MakeNamesResponse);
+  rpc GetAllModelsByMakeId (MakeRequest) returns (ModelsResponse);
+  rpc GetStocksByFilter (StocksRequest) returns (StocksResponse);
+  rpc CreateStock (StockCreationRequest) returns (Stock);
+  rpc DeleteStock (StockDeleteRequest) returns (google.protobuf.Empty);
+}

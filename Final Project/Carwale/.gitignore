@@ -1,0 +1,35 @@
+# Build and Publish folders
+bin/
+obj/
+publish/
+TestResults/
+.vscode/
+.idea/
+
+# User-specific files
+*.user
+*.suo
+*.cache
+*.pdb
+*.log
+
+# Dependency and package manager files
+node_modules/
+packages/
+*.nupkg
+project.lock.json
+global.json
+
+# Visual Studio and Rider settings
+.vs/
+*.vscode/
+*.sln.ide/
+*.DS_Store
+*.sln.DotSettings.user
+
+# Generated files
+*.Generated.cs
+Generated_Code/
+
+# Git configuration files
+.git/

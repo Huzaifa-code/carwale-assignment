@@ -1,0 +1,33 @@
+.applied-filter-container {
+    background-color: #fff;
+    margin-bottom: 1rem;
+    padding: 0.4rem 1rem;
+    border-radius: 5px;
+    border: 1px solid #cecece;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .sorting {
+        padding: 8px 7px;
+    }
+
+    .applied-filters-card{
+        background-color: #ebebeb;
+        border-radius: 5px;
+        font-size: 0.8rem;
+        padding: 10px 8px;
+        color: #3f3f3f;
+        gap: 5px;
+
+        .fa-xmark{
+            margin-left: 3px;
+            font-size: 1rem;
+            cursor: pointer;
+
+            &:hover{
+                color: rgb(159, 159, 159);
+            }
+        }
+    }
+}
